@@ -6,20 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/gluoncv-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gluoncv-{{ version }}.tar.gz
   sha256: 4598b9612e8b459a5a14ebeffedefcdae4a5700302a91f9b99fc82e9b08928a5
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - numpy
     - tqdm
     - requests
@@ -32,7 +33,7 @@ requirements:
     - pyyaml
     - autocfg
     - opencv
-    - pytorch
+    - pytorch >=1.4.0,<2.0
 
 test:
   imports:
@@ -41,6 +42,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/dmlc/gluon-cv
