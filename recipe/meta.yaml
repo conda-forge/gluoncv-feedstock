@@ -33,7 +33,7 @@ requirements:
     - pyyaml
     - autocfg
     - opencv
-    - pytorch
+    - pytorch >=1.4.0,<2.0
 
 test:
   imports:
